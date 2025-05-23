@@ -33,8 +33,20 @@ protected:
   BaseHandler(rclcpp::Logger logger) : logger_(logger) {}
 
   // Utility function to standardize timestamp formatting
+  // For rclcpp::Time
   template<typename TimeType>
   static std::string format_timestamp(const TimeType& stamp) {
+    std::stringstream ss;
+    // Always split into integer seconds and nanoseconds
+    int64_t nanosec_total = stamp.nanoseconds();
+    int64_t sec = nanosec_total / 1000000000;
+    int64_t nanosec = nanosec_total % 1000000000;
+    ss << sec << "-" << std::setw(9) << std::setfill('0') << nanosec;
+    return ss.str();
+  }
+
+  // Overload for builtin_interfaces::msg::Time
+  static std::string format_timestamp(const builtin_interfaces::msg::Time& stamp) {
     std::stringstream ss;
     ss << stamp.sec << "-" << std::setw(9) << std::setfill('0') << stamp.nanosec;
     return ss.str();
