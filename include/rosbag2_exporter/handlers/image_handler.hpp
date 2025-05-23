@@ -137,11 +137,8 @@ private:
   // Helper function to save uncompressed images
   void save_image(const cv::Mat& image, const std::string& topic, const builtin_interfaces::msg::Time& timestamp)
   {
-    // Create a timestamped filename
-    std::stringstream ss_timestamp;
-    ss_timestamp << timestamp.sec << "-"
-                 << std::setw(9) << std::setfill('0') << timestamp.nanosec;
-    std::string timestamp_str = ss_timestamp.str();
+    // Create a timestamped filename using the standard utility
+    std::string timestamp_str = BaseHandler::format_timestamp(timestamp);
 
     // Create the full file path
     std::string filepath = topic_dir_ + "/" + timestamp_str + ".png";

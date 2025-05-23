@@ -111,10 +111,7 @@ public:
     }
 
     // Create a timestamped filename
-    std::stringstream ss_timestamp;
-    ss_timestamp << img.header.stamp.sec << "-"
-                << std::setw(9) << std::setfill('0') << img.header.stamp.nanosec;
-    std::string timestamp = ss_timestamp.str();
+    std::string timestamp = BaseHandler::format_timestamp(img.header.stamp);
 
     // Ensure the directory exists, create if necessary
     std::filesystem::path dir_path = topic_dir_;

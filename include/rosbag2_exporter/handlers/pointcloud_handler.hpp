@@ -83,10 +83,7 @@ private:
                                size_t index)
   {
     // Construct timestamp string
-    std::stringstream ss_timestamp;
-    ss_timestamp << pc2.header.stamp.sec << "-"
-                 << std::setw(9) << std::setfill('0') << pc2.header.stamp.nanosec;
-    std::string timestamp = ss_timestamp.str();
+    std::string timestamp = BaseHandler::format_timestamp(pc2.header.stamp);
 
     // Log the processing
     RCLCPP_INFO(logger_, "Processing PointCloud2 message at timestamp: %s #%zu", timestamp.c_str(), index);

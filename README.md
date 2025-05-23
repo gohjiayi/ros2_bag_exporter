@@ -86,7 +86,7 @@ storage_id: "sqlite3"  # Common storage ID; ensure it matches your bag's storage
 topics:
   - name: "/camera/depth/image_raw"
     type: "DepthImage"
-    encoding: "bgr8"    # Options: "bgr8" (default, color), "rgb" (color), "mono8"/"8UC1" (grayscale), "16UC1" (raw depth)
+    encoding: "bgr8"    # Options: "bgr8" (default), "rgb8", "mono8"/"8UC1", "16UC1"
     sample_interval: 10  # Write one sample every 10 messages
   - name: "/camera/color/image_raw"
     type: "Image"

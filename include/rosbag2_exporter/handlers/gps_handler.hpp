@@ -34,10 +34,7 @@ public:
     serializer.deserialize_message(&serialized_msg, &gps_data);
 
     // Create a timestamped filename
-    std::stringstream ss_timestamp;
-    ss_timestamp << gps_data.header.stamp.sec << "-"
-                << std::setw(9) << std::setfill('0') << gps_data.header.stamp.nanosec;
-    std::string timestamp = ss_timestamp.str();
+    std::string timestamp = BaseHandler::format_timestamp(gps_data.header.stamp);
 
     // Sanitize the topic name by removing the leading '/'
     std::string sanitized_topic = topic;

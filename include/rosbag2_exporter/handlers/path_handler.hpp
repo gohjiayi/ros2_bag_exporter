@@ -43,10 +43,7 @@
      serializer.deserialize_message(&serialized_msg, &path_data);
 
      // 2. Create a timestamp string from the message header
-     std::stringstream ss_timestamp;
-     ss_timestamp << path_data.header.stamp.sec << "-"
-                  << std::setw(9) << std::setfill('0') << path_data.header.stamp.nanosec;
-     std::string timestamp = ss_timestamp.str();
+     std::string timestamp = BaseHandler::format_timestamp(path_data.header.stamp);
 
      // 3. Sanitize the topic name (remove leading '/')
      std::string sanitized_topic = topic;

@@ -10,6 +10,8 @@
 #include <rclcpp/serialization.hpp>
 #include <rclcpp/serialized_message.hpp>
 #include <rclcpp/logger.hpp>
+#include <iomanip>
+#include <sstream>
 
 namespace rosbag2_exporter
 {
@@ -18,7 +20,7 @@ class BaseHandler
 {
 public:
   virtual ~BaseHandler() = default;
-  
+
   // Pure virtual function to process messages
   virtual void process_message(const rclcpp::SerializedMessage & serialized_msg,
                                const std::string & topic,
@@ -29,6 +31,14 @@ protected:
 
   // Constructor to initialize the logger
   BaseHandler(rclcpp::Logger logger) : logger_(logger) {}
+
+  // Utility function to standardize timestamp formatting
+  template<typename TimeType>
+  static std::string format_timestamp(const TimeType& stamp) {
+    std::stringstream ss;
+    ss << stamp.sec << "-" << std::setw(9) << std::setfill('0') << stamp.nanosec;
+    return ss.str();
+  }
 };
 
 }  // namespace rosbag2_exporter

@@ -55,10 +55,7 @@
      }
 
      // Create a timestamped filename and save compressed image directly
-     std::stringstream ss_timestamp;
-     ss_timestamp << compressed_img.header.stamp.sec << "-"
-                  << std::setw(9) << std::setfill('0') << compressed_img.header.stamp.nanosec;
-     std::string timestamp = ss_timestamp.str();
+     std::string timestamp = BaseHandler::format_timestamp(compressed_img.header.stamp);
 
      std::string sanitized_topic = topic;
      // RCLCPP_WARN(logger_, "Topic-> %s", sanitized_topic.c_str());

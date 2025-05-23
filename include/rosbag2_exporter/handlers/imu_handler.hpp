@@ -34,10 +34,7 @@ public:
     serializer.deserialize_message(&serialized_msg, &imu_data);
 
     // Create a timestamped filename
-    std::stringstream ss_timestamp;
-    ss_timestamp << imu_data.header.stamp.sec << "-"
-                << std::setw(9) << std::setfill('0') << imu_data.header.stamp.nanosec;
-    std::string timestamp = ss_timestamp.str();
+    std::string timestamp = BaseHandler::format_timestamp(imu_data.header.stamp);
 
     // Create the full file path with '.csv' as the extension
     std::string filepath = topic_dir_ + "/" + timestamp + ".csv";
